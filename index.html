@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ForgeFit Planner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <nav class="topbar">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 64 64" role="img">
+              <defs>
+                <linearGradient id="brandGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ff7b45" />
+                  <stop offset="100%" stop-color="#f04d23" />
+                </linearGradient>
+              </defs>
+              <rect x="6" y="6" width="52" height="52" rx="18" fill="url(#brandGradient)" />
+              <path
+                d="M20 42V22h24v6H28v2h14v6H28v6z"
+                fill="#fffaf6"
+              />
+            </svg>
+          </div>
+          <div>
+            <p class="brand-kicker">ForgeFit</p>
+            <strong>Home Physique Planner</strong>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <span class="micro-chip">Modern Dashboard</span>
+          <span class="micro-chip">PDF Ready</span>
+        </div>
+      </nav>
+
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">4-Week Body Rebuild System</p>
+          <h1>Forge your muscle, energy, discipline, and a print-ready health plan.</h1>
+          <p class="hero-text">
+            Answer one complete questionnaire and get a practical home-training dashboard
+            with military-style calisthenics, dumbbell options, food guidance, hydration,
+            BMI tracking, weekly body-status goals, and supplement notes.
+          </p>
+          <div class="hero-pills">
+            <span>Home workouts</span>
+            <span>Nutrition plan</span>
+            <span>Weekly progress map</span>
+            <span>PDF print support</span>
+          </div>
+        </div>
+        <div class="hero-card">
+          <p class="hero-card-label">What this app creates</p>
+          <ul>
+            <li>Personal 4-week workout progression</li>
+            <li>Estimated calories, protein, water, and sleep targets</li>
+            <li>Country or region-aware meal suggestions</li>
+            <li>Doctor-consult notes for health risks</li>
+          </ul>
+        </div>
+      </header>
+
+      <main class="main-grid">
+        <section class="panel questionnaire-panel">
+          <div class="panel-heading">
+            <p class="section-kicker">Questionnaire</p>
+            <h2>Build your custom body plan</h2>
+            <p>
+              Fill in everything honestly. The better the inputs, the better the next 4
+              weeks will fit your body and routine.
+            </p>
+          </div>
+
+          <form id="planner-form" class="planner-form">
+            <div class="form-grid">
+              <label>
+                Full name
+                <input type="text" name="name" placeholder="Your name" required />
+              </label>
+              <label>
+                Age
+                <input type="number" name="age" min="14" max="80" required />
+              </label>
+              <label>
+                Sex
+                <select name="sex" required>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other / prefer not to say</option>
+                </select>
+              </label>
+              <label>
+                Country / region
+                <input
+                  type="text"
+                  name="region"
+                  placeholder="India, USA, Europe, Gulf..."
+                  required
+                />
+              </label>
+              <label>
+                Climate / weather
+                <select name="climate" required>
+                  <option value="hot">Hot / humid</option>
+                  <option value="mixed">Mixed / moderate</option>
+                  <option value="cold">Cold</option>
+                </select>
+              </label>
+              <label>
+                Height (cm)
+                <input type="number" name="heightCm" min="120" max="230" required />
+              </label>
+              <label>
+                Current weight (kg)
+                <input type="number" name="weightKg" min="30" max="250" step="0.1" required />
+              </label>
+              <label>
+                Target weight (kg)
+                <input type="number" name="targetWeightKg" min="30" max="250" step="0.1" required />
+              </label>
+              <label>
+                Body goal
+                <select name="goal" required>
+                  <option value="muscle">Build muscle</option>
+                  <option value="fat-loss">Lose fat</option>
+                  <option value="recomp">Body recomposition</option>
+                  <option value="fitness">General fitness / stamina</option>
+                </select>
+              </label>
+              <label>
+                Current activity
+                <select name="activityLevel" required>
+                  <option value="sedentary">Mostly sitting</option>
+                  <option value="light">Lightly active</option>
+                  <option value="moderate">Moderately active</option>
+                  <option value="high">Very active</option>
+                </select>
+              </label>
+              <label>
+                Workout experience
+                <select name="experience" required>
+                  <option value="beginner">Beginner</option>
+                  <option value="returning">Returning after break</option>
+                  <option value="intermediate">Intermediate</option>
+                </select>
+              </label>
+              <label>
+                Work style
+                <select name="workStyle" required>
+                  <option value="office">Office / desk job</option>
+                  <option value="hybrid">Hybrid</option>
+                  <option value="remote">Remote work</option>
+                  <option value="physical">Physical / active job</option>
+                  <option value="student">Student</option>
+                </select>
+              </label>
+              <label>
+                Office hours per day
+                <select name="officeHours" required>
+                  <option value="4">Around 4 hours</option>
+                  <option value="6">Around 6 hours</option>
+                  <option value="8">Around 8 hours</option>
+                  <option value="10">Around 10 hours</option>
+                  <option value="12">12+ hours</option>
+                </select>
+              </label>
+              <label>
+                Commute time total
+                <select name="commuteMinutes" required>
+                  <option value="0">No commute</option>
+                  <option value="30">Up to 30 minutes</option>
+                  <option value="60">Around 1 hour</option>
+                  <option value="90">Around 1.5 hours</option>
+                  <option value="120">2+ hours</option>
+                </select>
+              </label>
+              <label>
+                Best workout time
+                <select name="preferredWorkoutTime" required>
+                  <option value="morning">Morning before work</option>
+                  <option value="lunch">Lunch break / midday</option>
+                  <option value="evening">Evening after work</option>
+                  <option value="flexible">Flexible / varies</option>
+                </select>
+              </label>
+              <label>
+                Office break freedom
+                <select name="breakFlexibility" required>
+                  <option value="low">Very limited breaks</option>
+                  <option value="medium">Some short breaks</option>
+                  <option value="high">Can move often</option>
+                </select>
+              </label>
+              <label>
+                Days available each week
+                <select name="daysPerWeek" required>
+                  <option value="3">3 days</option>
+                  <option value="4">4 days</option>
+                  <option value="5">5 days</option>
+                  <option value="6">6 days</option>
+                </select>
+              </label>
+              <label>
+                Minutes available each day
+                <select name="sessionMinutes" required>
+                  <option value="25">25 minutes</option>
+                  <option value="35">35 minutes</option>
+                  <option value="45">45 minutes</option>
+                  <option value="60">60 minutes</option>
+                </select>
+              </label>
+              <label>
+                Equipment access
+                <select name="equipment" required>
+                  <option value="bodyweight">Bodyweight only</option>
+                  <option value="bands">Bands</option>
+                  <option value="dumbbells">Dumbbells</option>
+                  <option value="both">Bands + dumbbells</option>
+                </select>
+              </label>
+              <label>
+                Pull-up bar?
+                <select name="pullupBar" required>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </label>
+              <label>
+                Average sleep (hours)
+                <input type="number" name="sleepHours" min="3" max="12" step="0.5" required />
+              </label>
+              <label>
+                Stress level
+                <select name="stress" required>
+                  <option value="low">Low</option>
+                  <option value="medium">Medium</option>
+                  <option value="high">High</option>
+                </select>
+              </label>
+              <label>
+                Meals per day
+                <select name="mealsPerDay" required>
+                  <option value="3">3 meals</option>
+                  <option value="4">4 meals</option>
+                  <option value="5">5 meals</option>
+                  <option value="6">6 meals</option>
+                </select>
+              </label>
+              <label>
+                Food style
+                <select name="dietType" required>
+                  <option value="omnivore">Omnivore</option>
+                  <option value="vegetarian">Vegetarian</option>
+                  <option value="eggetarian">Eggetarian</option>
+                  <option value="vegan">Vegan</option>
+                </select>
+              </label>
+              <label>
+                Water intake now (liters/day)
+                <input type="number" name="currentWater" min="0.5" max="8" step="0.1" required />
+              </label>
+              <label>
+                Digestion / appetite
+                <select name="appetite" required>
+                  <option value="low">Low appetite</option>
+                  <option value="normal">Normal</option>
+                  <option value="high">High appetite</option>
+                </select>
+              </label>
+            </div>
+
+            <label class="full-width">
+              Health conditions, pain, or injuries
+              <textarea
+                name="conditions"
+                rows="3"
+                placeholder="Back pain, knee pain, asthma, diabetes, none..."
+              ></textarea>
+            </label>
+
+            <label class="full-width">
+              Food allergies or foods you avoid
+              <textarea
+                name="allergies"
+                rows="2"
+                placeholder="Milk, peanuts, gluten, none..."
+              ></textarea>
+            </label>
+
+            <label class="full-width">
+              Lifestyle notes
+              <textarea
+                name="lifestyle"
+                rows="2"
+                placeholder="Night shift, smoking, alcohol, travel, weak morning energy..."
+              ></textarea>
+            </label>
+
+            <div class="form-actions">
+              <button type="submit" class="primary-btn">Generate 4-Week Plan</button>
+              <button type="reset" class="ghost-btn">Reset</button>
+            </div>
+          </form>
+        </section>
+
+        <section id="results" class="panel results-panel hidden" aria-live="polite">
+          <div class="results-header">
+            <div>
+              <p class="section-kicker">Dashboard</p>
+              <h2 id="plan-title">Your 4-week performance plan</h2>
+              <p id="plan-summary"></p>
+            </div>
+            <div class="results-actions">
+              <span class="print-note-chip">Best quality: Save as PDF in portrait mode</span>
+              <button id="print-plan" class="primary-btn" type="button">Print / Save PDF</button>
+            </div>
+          </div>
+
+          <section class="print-cover">
+            <div class="print-cover-brand">
+              <div class="brand-mark small" aria-hidden="true">
+                <svg viewBox="0 0 64 64" role="img">
+                  <rect x="6" y="6" width="52" height="52" rx="18" fill="#f06434" />
+                  <path d="M20 42V22h24v6H28v2h14v6H28v6z" fill="#fffaf6" />
+                </svg>
+              </div>
+              <div>
+                <p class="brand-kicker">ForgeFit</p>
+                <strong>4-Week Body Plan Document</strong>
+              </div>
+            </div>
+            <p class="print-cover-text">
+              Structured training, food, hydration, recovery, and weekly body progress
+              built from the questionnaire below.
+            </p>
+          </section>
+
+          <div id="doctor-alert" class="doctor-alert hidden"></div>
+
+          <div id="stat-cards" class="stat-grid"></div>
+
+          <div class="dashboard-grid">
+            <article class="content-card">
+              <h3>Current vs target</h3>
+              <div id="body-status" class="body-status"></div>
+            </article>
+
+            <article class="content-card">
+              <h3>Hydration and recovery</h3>
+              <div id="recovery-status"></div>
+            </article>
+
+            <article class="content-card">
+              <h3>Office routine strategy</h3>
+              <div id="office-plan"></div>
+            </article>
+
+            <article class="content-card full-span">
+              <h3>4-week training plan</h3>
+              <div id="training-plan" class="week-stack"></div>
+            </article>
+
+            <article class="content-card full-span">
+              <h3>Weekly body-status roadmap</h3>
+              <div id="weekly-status" class="week-stack"></div>
+            </article>
+
+            <article class="content-card full-span">
+              <h3>Food plan</h3>
+              <div id="food-plan" class="meal-layout"></div>
+            </article>
+
+            <article class="content-card">
+              <h3>Supplement notes</h3>
+              <div id="supplement-plan"></div>
+            </article>
+
+            <article class="content-card">
+              <h3>Daily rules</h3>
+              <div id="daily-rules"></div>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
