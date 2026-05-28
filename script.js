@@ -6,6 +6,7 @@ const statCards = document.getElementById("stat-cards");
 const bodyStatus = document.getElementById("body-status");
 const recoveryStatus = document.getElementById("recovery-status");
 const officePlan = document.getElementById("office-plan");
+const healthGuidance = document.getElementById("health-guidance");
 const trainingPlan = document.getElementById("training-plan");
 const weeklyStatus = document.getElementById("weekly-status");
 const foodPlan = document.getElementById("food-plan");
@@ -120,6 +121,7 @@ function buildPlan(profile) {
     doctorFlag,
     recoveryScore: getRecoveryScore(profile, waterLiters, sleepTarget),
     officeRoutine: buildOfficeRoutine(profile),
+    healthGuidance: buildHealthGuidance(profile),
     workouts: buildWorkoutWeeks(profile, workoutTemplate),
     weeklyStatus: buildWeeklyStatus(profile),
     meals: buildMealPlan(profile, regionFoods, calorieTarget, proteinGrams),
@@ -446,6 +448,166 @@ function buildDailyRules(profile, waterLiters, proteinGrams, sleepTarget) {
   ];
 }
 
+function buildHealthGuidance(profile) {
+  const text = `${profile.conditions} ${profile.lifestyle}`.toLowerCase();
+  const matched = [];
+
+  const rules = [
+    {
+      keys: ["back", "lower back", "slip disc", "disc"],
+      title: "Back pain or spinal discomfort",
+      doList: [
+        "Prioritize walking, gentle mobility, dead bug, bird-dog, and controlled glute bridge work.",
+        "Keep core braced during squats, hinges, and pushing exercises.",
+        "Use slow tempo and stop immediately if pain radiates or sharpens.",
+      ],
+      avoidList: [
+        "Avoid high-impact jumping or heavy loaded bending from the floor in pain phases.",
+        "Do not push through nerve-like pain, tingling, or pain shooting into the leg.",
+      ],
+      consult: "See a doctor or physiotherapist if pain is severe, radiating, or lasts more than a few days.",
+    },
+    {
+      keys: ["knee", "knees"],
+      title: "Knee pain",
+      doList: [
+        "Use chair squats, box squats, glute bridges, calf raises, and controlled split-squat range.",
+        "Warm up with ankle mobility and light quad activation before training.",
+        "Keep knee tracking in line with toes and use pain-free range only.",
+      ],
+      avoidList: [
+        "Avoid deep painful squats, jump-heavy circuits, and twisting under load.",
+        "Do not ignore swelling or locking sensations.",
+      ],
+      consult: "Consult a clinician if the knee swells, buckles, locks, or hurts during daily walking.",
+    },
+    {
+      keys: ["shoulder"],
+      title: "Shoulder pain",
+      doList: [
+        "Use incline push-ups, wall slides, band pull-aparts, and light rowing patterns first.",
+        "Keep elbow angle comfortable and favor pain-free pressing range.",
+        "Add shoulder blade control work before upper-body sessions.",
+      ],
+      avoidList: [
+        "Avoid aggressive overhead pressing or deep dips if they pinch.",
+        "Do not force range of motion through joint pain.",
+      ],
+      consult: "Get medical guidance if lifting the arm is painful at rest or pain disturbs sleep.",
+    },
+    {
+      keys: ["neck"],
+      title: "Neck pain or stiffness",
+      doList: [
+        "Do posture resets, chin tucks, upper-back mobility, and light walking breaks.",
+        "Keep screens at eye level and reduce long static sitting.",
+      ],
+      avoidList: [
+        "Avoid jerky ab work, heavy shrugging, and exercises that trigger headaches or arm tingling.",
+      ],
+      consult: "Seek care if neck pain causes numbness, tingling, weakness, or frequent headaches.",
+    },
+    {
+      keys: ["asthma"],
+      title: "Asthma or breathing sensitivity",
+      doList: [
+        "Use longer warm-ups and increase intensity gradually.",
+        "Keep rescue medication accessible if prescribed by your doctor.",
+        "Prefer steady conditioning and nasal breathing on easy efforts.",
+      ],
+      avoidList: [
+        "Avoid sudden all-out circuits without warm-up.",
+        "Do not train through wheezing, chest tightness, or unusual breathlessness.",
+      ],
+      consult: "Doctor review is important if symptoms are frequent or exercise regularly triggers attacks.",
+    },
+    {
+      keys: ["diabetes", "sugar"],
+      title: "Blood sugar or diabetes concerns",
+      doList: [
+        "Keep meal timing consistent and avoid long gaps before training.",
+        "Track energy, dizziness, and hydration carefully around workouts.",
+        "Carry a quick carb source if your doctor has advised it.",
+      ],
+      avoidList: [
+        "Avoid intense fasted training unless medically cleared.",
+        "Do not guess around medication timing and hard exercise.",
+      ],
+      consult: "Talk with your doctor about workout intensity, meal timing, and medicines before following the plan closely.",
+    },
+    {
+      keys: ["bp", "blood pressure", "hypertension"],
+      title: "Blood pressure concerns",
+      doList: [
+        "Use controlled breathing and moderate effort rather than constant all-out sets.",
+        "Favor walking, light circuits, and gradual strength progression.",
+      ],
+      avoidList: [
+        "Avoid holding your breath during hard reps.",
+        "Avoid maximal effort testing or very intense conditioning if readings are not controlled.",
+      ],
+      consult: "Medical clearance is wise if blood pressure is uncontrolled or symptoms include dizziness or chest discomfort.",
+    },
+    {
+      keys: ["heart", "cardiac", "chest pain"],
+      title: "Heart-related history",
+      doList: [
+        "Keep exercise moderate and steady unless a doctor has cleared harder training.",
+        "Track unusual fatigue, chest sensations, and breathlessness carefully.",
+      ],
+      avoidList: [
+        "Avoid self-prescribing intense bootcamp-style sessions.",
+        "Do not ignore chest pain, fainting, or pressure symptoms.",
+      ],
+      consult: "Doctor approval is strongly recommended before starting the full program.",
+    },
+    {
+      keys: ["surgery", "operation"],
+      title: "Recent surgery or medical procedure",
+      doList: [
+        "Return gradually and prioritize walking, mobility, and clinician-approved movements first.",
+        "Follow your surgeon or physiotherapist timelines above any app guidance.",
+      ],
+      avoidList: [
+        "Avoid loading the affected area before you are medically cleared.",
+      ],
+      consult: "You should follow direct medical advice first and use this app only as a secondary structure.",
+    },
+  ];
+
+  rules.forEach((rule) => {
+    if (rule.keys.some((key) => text.includes(key))) {
+      matched.push(rule);
+    }
+  });
+
+  if (!matched.length) {
+    return {
+      summary: "No specific condition keyword was detected. Use normal progressive training, but stop and reassess if any movement causes sharp, joint-specific, or radiating pain.",
+      items: [
+        {
+          title: "General safety",
+          doList: [
+            "Warm up for 5 to 8 minutes before training.",
+            "Use clean form and gradually increase reps or weight.",
+            "Sleep, hydration, and recovery matter as much as exercise.",
+          ],
+          avoidList: [
+            "Avoid ego training and pain-chasing.",
+            "Do not use supplements or medicines blindly.",
+          ],
+          consult: "If pain appears and lasts, get medical advice before progressing hard.",
+        },
+      ],
+    };
+  }
+
+  return {
+    summary: "Your health notes triggered extra precaution guidance. Use the plan conservatively and follow the suggestions below along with doctor advice where needed.",
+    items: matched,
+  };
+}
+
 function buildOfficeRoutine(profile) {
   const officeLikeWork = ["office", "hybrid", "remote", "student"].includes(profile.workStyle);
   const workoutWindow = getWorkoutWindow(profile);
@@ -552,6 +714,7 @@ function renderPlan(plan) {
   renderBodyStatus(plan);
   renderRecovery(plan);
   renderOfficePlan(plan.officeRoutine);
+  renderHealthGuidance(plan.healthGuidance);
   renderTraining(plan.workouts);
   renderWeeklyStatus(plan.weeklyStatus);
   renderMeals(plan.meals);
@@ -659,6 +822,29 @@ function renderOfficePlan(plan) {
       <small>Office food and water</small>
       <ul class="plain-list">${plan.mealStrategy.map((item) => `<li>${item}</li>`).join("")}</ul>
     </div>
+  `;
+}
+
+function renderHealthGuidance(plan) {
+  healthGuidance.innerHTML = `
+    <p>${plan.summary}</p>
+    ${plan.items
+      .map(
+        (item) => `
+          <article class="week-card">
+            <header>
+              <h4>${item.title}</h4>
+              <span class="badge">Do / Avoid</span>
+            </header>
+            <p><strong>Do:</strong></p>
+            <ul class="plain-list">${item.doList.map((entry) => `<li>${entry}</li>`).join("")}</ul>
+            <p><strong>Avoid:</strong></p>
+            <ul class="plain-list">${item.avoidList.map((entry) => `<li>${entry}</li>`).join("")}</ul>
+            <p><strong>Medical note:</strong> ${item.consult}</p>
+          </article>
+        `
+      )
+      .join("")}
   `;
 }
 
